@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+  /* Container Polish */
+.inventory-app {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Badge */
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.status-badge {
+    background: #dcfce7;
+    color: #166534;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Modern Button */
+#add-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%; /* Better for mobile responsiveness */
+}
+
+#add-btn:hover {
+    background: #1e40af;
+}
+
+/* Table Refinement */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid #f1f5f9;
+    color: #64748b;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+td {
+    padding: 16px 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.delete-btn {
+    background: #fee2e2;
+    color: #991b1b;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.delete-btn:hover {
+    background: #fecaca;
+}
+
+/* Fixes the "small" inputs in your second image */
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap; /* Keeps it mobile-friendly for Omoibo's hybrid work */
+}
+
+input {
+    flex: 1; /* Makes inputs grow to fill space */
+    min-width: 150px;
+    padding: 12px;
+    border: 1px solid #cbd5e1; /* Modern flat border */
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: #2563eb; /* Matches your button color */
+}
+    </style>
+</head>
+<body>
+    <div class="inventory-app">
+    <div class="header-flex">
+        <h2>Admin Product Manager</h2>
+        <span class="status-badge">Live Store</span>
+    </div>
+    
+    <div class="input-group">
+        <input type="text" id="pName" placeholder="Product Name (e.g. Nike Air Max)">
+        <input type="number" id="pPrice" placeholder="Price (₦)">
+        <button onclick="addProduct()" id="add-btn">Add to Inventory</button>
+    </div>
+
+    <div class="table-container">
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th style="text-align: right;">Action</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function addProduct() {
+    const name = document.getElementById('pName').value;
+    const price = document.getElementById('pPrice').value;
+    
+    if(name && price) {
+        const table = document.getElementById('tableBody');
+        const row = `<tr>
+            <td>${name}</td>
+            <td>₦${price}</td>
+            <td><button onclick="this.parentElement.parentElement.remove()" style="color:red">Delete</button></td>
+        </tr>`;
+        table.innerHTML += row;
+        // Reset inputs
+        document.getElementById('pName').value = '';
+        document.getElementById('pPrice').value = '';
+    } else {
+        alert("Please fill all fields");
+    }
+}
+</script>
+</body>
+</html>
